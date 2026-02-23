@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Meet the Legal Team That Fights for You — PML Law Firm</title>
+    <meta name="description" content="Discover why clients trust PML Law Firm for high-stakes litigation and traffic cases. Our expertise, dedication, and results set us apart from other law firms near me.">
+    <meta name="keywords" content="law firms near me, experienced legal team, law firm, trusted attorneys, legal expertise">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '7f57e231-0f9d-4b0c-adfa-e6517730a712',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="Meet the Legal Team That Fights for You — PML Law Firm">
+  <meta property="og:description" content="Discover why clients trust PML Law Firm for high-stakes litigation and traffic cases. Our expertise, dedication, and results set us apart from other law firms near me.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meet the Legal Team That Fights for You — PML Law Firm">
+  <meta name="twitter:description" content="Discover why clients trust PML Law Firm for high-stakes litigation and traffic cases. Our expertise, dedication, and results set us apart from other law firms near me.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/pml-law-firm-legal-services-logo.webp" alt="PML Law Firm" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/practice-areas">Practice Areas</a></li><li><a href="/about">About</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">Contact</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="about-page-intro-section" data-layout-spec="About-page-intro">
+  <div class="about-page-intro-container">
+    <div class="about-page-intro-content">
+      <h1>About PML Law Firm</h1>
+      <p>A focused practice built for clients who value disciplined strategy, clear counsel, and strong advocacy.</p>
+      <div class="about-page-intro-rule"></div>
+    </div>
+  </div>
+  <div class="about-page-intro-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L1200,0 L1200,60 Z" fill="var(--bg-light)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="about-story-section" data-layout-spec="About-story">
+  <div class="about-story-container">
+    <div class="about-story-content">
+      <h2>A Practice Defined by Preparation</h2>
+      <p>At PML Law Firm, we believe that successful litigation begins long before the courtroom. Our approach is rooted in meticulous case preparation, strategic analysis, and a deep understanding of both the law and our clients' unique circumstances. Every case receives the same level of dedicated attention, whether it involves complex litigation or focused traffic representation.</p>
+      <p>We maintain transparent communication throughout the legal process, ensuring our clients understand each step, each decision, and each strategic move. This clarity builds confidence and allows for collaborative decision-making that serves our clients' best interests.</p>
+      <p>Our commitment extends beyond winning cases—we aim to deliver outcomes that protect our clients' rights, preserve their reputations, and position them for future success. This philosophy has defined our practice since inception and continues to guide every case we undertake.</p>
+      
+      <div class="about-story-milestones">
+        <div class="about-story-milestone">
+          <h3>Built on Litigation Discipline</h3>
+          <p>Our foundation rests on rigorous litigation expertise. We approach each case with the discipline of seasoned trial attorneys, conducting thorough discovery, crafting compelling arguments, and anticipating opposing counsel's strategies. This preparation transforms uncertainty into confidence and positions our clients for favorable resolutions.</p>
+        </div>
+        
+        <div class="about-story-milestone">
+          <h3>Focused Traffic Representation</h3>
+          <p>Traffic violations carry consequences that extend beyond fines—they impact driving records, insurance rates, and professional licenses. We bring the same litigation rigor to traffic cases, challenging evidence, negotiating with prosecutors, and protecting our clients from disproportionate penalties. Every citation deserves a strategic defense.</p>
+        </div>
+        
+        <div class="about-story-milestone">
+          <h3>Refined, Client-First Process</h3>
+          <p>Our process has been refined through years of practice to prioritize client needs while maintaining legal excellence. We combine accessibility with expertise, offering clear timelines, regular updates, and responsive communication. This client-first approach ensures that legal representation enhances rather than complicates our clients' lives.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="about-story-image-wrapper">
+      <img data-placeholder="about-story-courthouse" data-context="Professional editorial photograph of a grand courthouse corridor with tall classical columns, marble floors, and dramatic natural light streaming through tall windows. Shot with negative space on one side, bright and airy atmosphere, architectural symmetry, clean and sophisticated composition that conveys authority and justice. High-end legal photography style." width="600" height="800" src="/assets/site-about-story-courthouse.webp" alt="Courthouse corridor with classical columns representing legal authority and tradition">
+    </div>
+  </div>
+  
+  <div class="about-story-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,45 Q30,42 60,46 T120,43 Q150,47 180,44 T240,46 Q270,43 300,47 T360,44 Q390,46 420,43 T480,47 Q510,44 540,46 T600,43 Q630,47 660,44 T720,46 Q750,43 780,47 T840,44 Q870,46 900,43 T960,47 Q990,44 1020,46 T1080,43 Q1110,47 1140,44 T1200,46 L1200,60 Z" fill="var(--bg-light)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="about-team-section" data-layout-spec="About-team">
+  <div class="about-team-container">
+    <div class="about-team-header">
+      <h2>Your Legal Team</h2>
+    </div>
+    
+    <div class="about-team-grid">
+      <article class="about-team-card">
+        <div class="about-team-image-wrapper">
+          <img data-placeholder="about-team-image-1" data-context="Professional headshot portrait of male attorney in dark navy suit and silver tie, neutral light gray background, confident and approachable expression, well-lit studio photography, legal professional" width="600" height="800" src="/assets/site-about-team-image-1.webp" alt="Senior Litigation Attorney">
+        </div>
+        <div class="about-team-content">
+          <h3>Michael Patterson</h3>
+          <p>Senior Partner specializing in complex litigation with over 20 years of courtroom experience. Michael has successfully represented clients in high-stakes civil disputes, achieving favorable outcomes through strategic advocacy and meticulous case preparation.</p>
+        </div>
+      </article>
+
+      <article class="about-team-card">
+        <div class="about-team-image-wrapper">
+          <img data-placeholder="about-team-image-2" data-context="Professional headshot portrait of female attorney in dark navy blazer and white blouse, neutral light gray background, confident and professional demeanor, well-lit studio photography, legal professional" width="600" height="800" src="/assets/site-about-team-image-2.webp" alt="Traffic Law Specialist">
+        </div>
+        <div class="about-team-content">
+          <h3>Sarah Chen</h3>
+          <p>Lead Traffic Law Attorney with expertise in defending clients against serious traffic violations and license suspensions. Sarah's comprehensive knowledge of traffic regulations and dedication to client advocacy has protected countless driving privileges.</p>
+        </div>
+      </article>
+
+      <article class="about-team-card">
+        <div class="about-team-image-wrapper">
+          <img data-placeholder="about-team-image-3" data-context="Professional headshot portrait of male attorney in dark navy suit and burgundy tie, neutral light gray background, approachable and trustworthy expression, well-lit studio photography, legal professional" width="600" height="800" src="/assets/site-about-team-image-3.webp" alt="Personal Injury Attorney">
+        </div>
+        <div class="about-team-content">
+          <h3>David Reynolds</h3>
+          <p>Associate Attorney focusing on personal injury law and civil litigation. David brings a client-centered approach to every case, ensuring thorough representation and compassionate guidance through complex legal challenges.</p>
+        </div>
+      </article>
+
+      <article class="about-team-card">
+        <div class="about-team-image-wrapper">
+          <img data-placeholder="about-team-image-4" data-context="Professional headshot portrait of female attorney in dark navy blazer and silver accessories, neutral light gray background, confident and professional demeanor, well-lit studio photography, legal professional" width="600" height="800" src="/assets/site-about-team-image-4.webp" alt="Legal Associate">
+        </div>
+        <div class="about-team-content">
+          <h3>Jennifer Martinez</h3>
+          <p>Legal Associate providing essential support across litigation and traffic law matters. Jennifer's attention to detail and commitment to thorough case research strengthens every client representation at PML Law Firm.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="about-team-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="1" x2="540" y2="1" stroke="var(--primary)" stroke-width="1"></line>
+      <path d="M 540 1 L 560 1 L 600 0 L 640 1 L 660 1" fill="none" stroke="var(--accent)" stroke-width="1"></path>
+      <line x1="660" y1="1" x2="1200" y2="1" stroke="var(--primary)" stroke-width="1"></line>
+      <circle cx="600" cy="1" r="3" fill="var(--accent)"></circle>
+    </svg>
+  </div>
+</section>
+
+<section class="about-values-section" data-layout-spec="About-values">
+  <div class="about-values-container">
+    <div class="about-values-header">
+      <h2>Principles that Guide the Work</h2>
+    </div>
+    <div class="about-values-grid">
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Clarity</h3>
+          <p>Every case begins with clear communication. Legal matters are complex, but your understanding of them should not be. We translate legal jargon into plain language and ensure you know exactly where you stand at every stage.</p>
+        </div>
+      </article>
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Preparation</h3>
+          <p>Successful outcomes are built on meticulous preparation. We leave nothing to chance, researching every angle, anticipating every challenge, and building cases that stand up to the most rigorous scrutiny.</p>
+        </div>
+      </article>
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Discretion</h3>
+          <p>Your legal matters are handled with the utmost confidentiality and professionalism. We understand the sensitive nature of legal representation and maintain absolute discretion in all our client relationships.</p>
+        </div>
+      </article>
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Responsiveness</h3>
+          <p>When you have questions or concerns, you receive prompt attention. We understand that legal issues do not wait, and neither should you. Our commitment to accessibility means you are never left wondering about your case.</p>
+        </div>
+      </article>
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Precision</h3>
+          <p>Legal work demands exactitude. From document preparation to courtroom arguments, every detail matters. Our practice is built on precision—in analysis, in strategy, and in execution.</p>
+        </div>
+      </article>
+      <article class="about-values-card">
+        <div class="about-values-card-border"></div>
+        <div class="about-values-card-content">
+          <h3>Outcome Focus</h3>
+          <p>While process matters, results matter more. Every decision we make is guided by a single question: what serves your best interests? We measure success by the outcomes we achieve for our clients.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="about-values-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,35 Q150,28 300,35 T600,35 Q750,28 900,35 T1200,35 L1200,60 Z" fill="var(--bg-light)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="about-cta-section" data-layout-spec="About-cta">
+  <div class="about-cta-container">
+    <h2>Work with a Focused Legal Practice</h2>
+    <p>If your matter demands disciplined advocacy, we're ready to help.</p>
+    <div class="about-cta-buttons">
+      <a href="/contact" class="btn-primary">Contact Us</a>
+      <a href="/practice-areas" class="btn-ghost">Practice Areas</a>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-content"><div class="footer-column footer-about"><img src="/assets/pml-law-firm-legal-services-logo.webp" alt="PML Law Firm" class="logo" /><p class="footer-description">Trusted legal expertise and dedicated representation for your most important matters.</p></div><div class="footer-column footer-links"><h3>Quick Links</h3><ul><li><a href="/practice-areas">Practice Areas</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="footer-column footer-contact"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-column footer-social"><h3>Connect With Us</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">Privacy Policy</a><span class="separator">|</span><a href="/terms">Terms &amp; Conditions</a><span class="separator">|</span><a href="/accessibility">Accessibility</a></div><div class="footer-copyright"><p>© 2026 PML Law Firm. All rights reserved.</p><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body>
+</html>
